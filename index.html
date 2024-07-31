@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            width: 100vw;
+            height: 100vh;
+            background-color: #81ff81;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+        header{
+            width: 100%;
+            height: 2rem;
+            background-color: #51da51;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0rem 1rem;
+            -webkit-app-region:drag;
+
+        }
+
+        header .close{
+            width: 16px;
+            height: 16px;
+            background-color: red;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            -webkit-app-region:no-drag
+        }
+
+        header .new{
+            font-size: 1.4rem;
+            font-weight: bolder;
+            border: none;
+            background-color: transparent;
+            -webkit-app-region:no-drag
+        }
+
+        header .new:hover{
+            opacity: 60%;
+            cursor: pointer;
+        }
+
+        #text{
+            width: 100%;
+            height: 84%;
+            font-family: monospace;
+            font-size: 1.4rem;
+            font-weight: bold;
+            font-variant: all-small-caps;
+            background-color: transparent;
+            border: none;
+            padding: 6px;
+            resize: none;
+            -webkit-app-region:no-drag
+        }
+
+        #text:focus-visible{
+            outline: none;
+        }
+
+        #text::-webkit-scrollbar-thumb{
+            background-color: #51da51;
+            border-radius: 12px;
+            -webkit-app-region:no-drag
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button onclick="window.close()" class="close" ></button>
+        <button onclick="createNew()" class="new" >+</button>
+    </header>
+
+    <textarea name="text" id="text" cols="30" rows="10"></textarea>
+    <script>
+        const app = require('electron')
+
+        function createNew(){
+            app.ipcRenderer.send('make-new-window',"Sending Message To Make New Window ")
+        }
+    </script>
+</body>
+</html>
